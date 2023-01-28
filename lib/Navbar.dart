@@ -80,7 +80,7 @@ class NavBar extends StatelessWidget {
                           softWrap: true,
                           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
                         ),
-                        const Spacer(),
+                        const Spacer() ,
                       ],
                     ),
                   ),
