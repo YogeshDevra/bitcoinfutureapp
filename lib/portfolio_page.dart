@@ -5,6 +5,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'coins_page.dart';
@@ -88,6 +89,28 @@ class _PortfolioPageState extends State<PortfolioPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading:Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: const Color(0xff111622)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const NavBar()),);
+                  }, // Image tapped
+                  child: const Icon(Icons.menu_rounded,color: Colors.grey,)
+              ),
+            ),
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: const Color(0xff111622),
+        centerTitle: true,
+        title: Text(AppLocalizations.of(context).translate('portfolio')),
+        titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold)),
+      ),
       body: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
@@ -98,33 +121,33 @@ class _PortfolioPageState extends State<PortfolioPage>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 40,
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const NavBar()),
-                          );
-                        }, // Image tapped
-                        child: const Icon(Icons.menu_rounded,color: Colors.grey,)
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 90,
-                    ),
-                    Text(AppLocalizations.of(context).translate('portfolio'),
-                      style: const TextStyle(color: Colors.white,fontSize:28,fontWeight: FontWeight.bold),)
-                  ],
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
+                // const SizedBox(
+                //   height: 40,
+                // ),
+                // Row(
+                //   children: [
+                //     Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: InkWell(
+                //         onTap: () {
+                //           Navigator.push(
+                //             context,
+                //             MaterialPageRoute(builder: (context) => const NavBar()),
+                //           );
+                //         }, // Image tapped
+                //         child: const Icon(Icons.menu_rounded,color: Colors.grey,)
+                //       ),
+                //     ),
+                //     const SizedBox(
+                //       width: 90,
+                //     ),
+                //     Text(AppLocalizations.of(context).translate('portfolio'),
+                //       style: const TextStyle(color: Colors.white,fontSize:28,fontWeight: FontWeight.bold),)
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: 40,
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Align(
@@ -245,14 +268,11 @@ class _PortfolioPageState extends State<PortfolioPage>
                       :Center(
                     child: ElevatedButton(
                       onPressed:(){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const CoinsPage()),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const CoinsPage()));
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
-                        child: Text(AppLocalizations.of(context).translate('no_coins_added')),
+                        child: Text(AppLocalizations.of(context).translate('add_coins')),
                       ),
                       style: ButtonStyle(
                           foregroundColor: MaterialStateProperty.all<Color>(Colors.white,),

@@ -61,6 +61,28 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading:Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: const Color(0xff111622)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const NavBar()),);
+                  }, // Image tapped
+                  child: const Icon(Icons.menu_rounded,color: Colors.grey,)
+              ),
+            ),
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: const Color(0xff111622),
+        centerTitle: true,
+        title: Text(AppLocalizations.of(context).translate('top_coin')),
+        titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold)),
+      ),
       body: Container(
         decoration: const BoxDecoration(color: Color(0xff111622)),
         child: Column(
@@ -72,36 +94,36 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                 length: 2,
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => NavBar()),
-                                  );
-                                }, // Image tapped
-                                child: const Icon(Icons.menu_rounded,color: Colors.grey,)
-                            ),
-                          ),
-                          const Spacer(),
-                          Text(AppLocalizations.of(context).translate('top_coin'), style: GoogleFonts.openSans(textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold),)
-                          ),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10,),
+                    // const SizedBox(
+                    //   height: 40,
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Row(
+                    //     children: [
+                    //       Padding(
+                    //         padding: const EdgeInsets.all(8.0),
+                    //         child: InkWell(
+                    //             onTap: () {
+                    //               Navigator.push(
+                    //                 context,
+                    //                 MaterialPageRoute(builder: (context) => NavBar()),
+                    //               );
+                    //             }, // Image tapped
+                    //             child: const Icon(Icons.menu_rounded,color: Colors.grey,)
+                    //         ),
+                    //       ),
+                    //       const Spacer(),
+                    //       Text(AppLocalizations.of(context).translate('top_coin'), style: GoogleFonts.openSans(textStyle: const TextStyle(
+                    //           color: Colors.white,
+                    //           fontSize: 25,
+                    //           fontWeight: FontWeight.bold),)
+                    //       ),
+                    //       const Spacer(),
+                    //     ],
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 10,),
                     Row(
                       children: [
                         Padding(
@@ -115,10 +137,7 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const TopGainer()),
-                              );
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const TopGainer()));
                             }, // Image tapped
                             child: Container(
                               decoration: BoxDecoration(color: const Color(0xff2e3546),borderRadius: BorderRadius.circular(20)),
@@ -131,9 +150,9 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 30,
-                        ),
+                        // const SizedBox(
+                        //   width: 30,
+                        // ),
                       ],
                     ),
                     const SizedBox(

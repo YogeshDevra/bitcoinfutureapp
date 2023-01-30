@@ -81,39 +81,61 @@ class _CoinsPageState extends State<CoinsPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading:Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: const Color(0xff111622)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const NavBar()),);
+                  }, // Image tapped
+                  child: const Icon(Icons.menu_rounded,color: Colors.grey,)
+              ),
+            ),
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: const Color(0xff111622),
+        centerTitle: true,
+        title: Text(AppLocalizations.of(context).translate('coins')),
+        titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold)),
+      ),
       body: Container(
         decoration: const BoxDecoration(color: Color(0xff111622)),
         child: Column(
           children: <Widget>[
-            const SizedBox(
-              height: 40,
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => NavBar()),
-                        );
-                      }, // Image tapped
-                      child: const Icon(Icons.menu_rounded,color: Colors.grey,)
-                  ),
-                ),
-                const Spacer(),
-                Text(AppLocalizations.of(context).translate('coins'), style: GoogleFonts.openSans(textStyle: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),)
-                ),
-                const Spacer(),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            // const SizedBox(
+            //   height: 40,
+            // ),
+            // Row(
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: InkWell(
+            //           onTap: () {
+            //             Navigator.push(
+            //               context,
+            //               MaterialPageRoute(builder: (context) => NavBar()),
+            //             );
+            //           }, // Image tapped
+            //           child: const Icon(Icons.menu_rounded,color: Colors.grey,)
+            //       ),
+            //     ),
+            //     const Spacer(),
+            //     Text(AppLocalizations.of(context).translate('coins'), style: GoogleFonts.openSans(textStyle: const TextStyle(
+            //         color: Colors.white,
+            //         fontSize: 25,
+            //         fontWeight: FontWeight.bold),)
+            //     ),
+            //     const Spacer(),
+            //   ],
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
             Expanded(
                 child:Container(
                   padding: const EdgeInsets.only(
