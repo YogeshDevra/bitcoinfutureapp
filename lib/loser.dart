@@ -94,36 +94,6 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
                 length: 2,
                 child: Column(
                   children: [
-                    // const SizedBox(
-                    //   height: 40,
-                    // ),
-                    // Padding(
-                    //   padding: const EdgeInsets.all(8.0),
-                    //   child: Row(
-                    //     children: [
-                    //       Padding(
-                    //         padding: const EdgeInsets.all(8.0),
-                    //         child: InkWell(
-                    //             onTap: () {
-                    //               Navigator.push(
-                    //                 context,
-                    //                 MaterialPageRoute(builder: (context) => NavBar()),
-                    //               );
-                    //             }, // Image tapped
-                    //             child: const Icon(Icons.menu_rounded,color: Colors.grey,)
-                    //         ),
-                    //       ),
-                    //       const Spacer(),
-                    //       Text(AppLocalizations.of(context).translate('top_coin'), style: GoogleFonts.openSans(textStyle: const TextStyle(
-                    //           color: Colors.white,
-                    //           fontSize: 25,
-                    //           fontWeight: FontWeight.bold),)
-                    //       ),
-                    //       const Spacer(),
-                    //     ],
-                    //   ),
-                    // ),
-                    // const SizedBox(height: 10,),
                     Row(
                       children: [
                         Padding(

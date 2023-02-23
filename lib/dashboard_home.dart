@@ -130,35 +130,6 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        // const SizedBox(
-                        //   height: 40,
-                        // ),
-                        // Row(
-                        //   children: [
-                        //     Padding(
-                        //       padding: const EdgeInsets.all(8.0),
-                        //       child: InkWell(
-                        //           onTap: () {
-                        //             Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(builder: (context) => NavBar()),
-                        //             );
-                        //           }, // Image tapped
-                        //           child: const Icon(Icons.menu_rounded,color: Colors.grey,)
-                        //       ),
-                        //     ),
-                        //     const Spacer(),
-                        //     Text(AppLocalizations.of(context).translate('home'),
-                        //         style: GoogleFonts.openSans(
-                        //           textStyle: const TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),
-                        //         )
-                        //     ),
-                        //     const Spacer(),
-                        //   ],
-                        // ),
-                        // const SizedBox(
-                        //   height: 20,
-                        // ),
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Image.asset("assets/image/logo_hor.png"),

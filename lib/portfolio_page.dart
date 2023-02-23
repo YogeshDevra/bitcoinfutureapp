@@ -121,33 +121,7 @@ class _PortfolioPageState extends State<PortfolioPage>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // const SizedBox(
-                //   height: 40,
-                // ),
-                // Row(
-                //   children: [
-                //     Padding(
-                //       padding: const EdgeInsets.all(8.0),
-                //       child: InkWell(
-                //         onTap: () {
-                //           Navigator.push(
-                //             context,
-                //             MaterialPageRoute(builder: (context) => const NavBar()),
-                //           );
-                //         }, // Image tapped
-                //         child: const Icon(Icons.menu_rounded,color: Colors.grey,)
-                //       ),
-                //     ),
-                //     const SizedBox(
-                //       width: 90,
-                //     ),
-                //     Text(AppLocalizations.of(context).translate('portfolio'),
-                //       style: const TextStyle(color: Colors.white,fontSize:28,fontWeight: FontWeight.bold),)
-                //   ],
-                // ),
-                // const SizedBox(
-                //   height: 40,
-                // ),
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Align(

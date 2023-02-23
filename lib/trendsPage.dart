@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,7 +40,10 @@ class _TrendsPageState extends State<TrendsPage> {
   final _formKey2 = GlobalKey<FormState>();
   String? currencyNameForImage;
   double totalValuesOfPortfolio = 0.0;
+  String? iFrameUrl;
+  bool? displayIframe;
   SharedPreferences? sharedPreferences;
+  late WebViewController controller;
 
   TextEditingController? coinCountTextEditingController;
   TextEditingController? coinCountEditTextEditingController;
@@ -73,6 +77,8 @@ class _TrendsPageState extends State<TrendsPage> {
       await remoteConfig.fetchAndActivate();
 
       URL = remoteConfig.getString('bitFuture_image_url').trim();
+      iFrameUrl = remoteConfig.getString('bitFuture_form_url_iOS').trim();
+      displayIframe = remoteConfig.getBool('bitFuture_disable_form');
 
       setState(() {
 
@@ -80,6 +86,26 @@ class _TrendsPageState extends State<TrendsPage> {
     } catch (exception) {
     }
     callGraphApi();
+    controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith(iFrameUrl!)) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(iFrameUrl!));
   }
 
   @override
@@ -119,37 +145,6 @@ class _TrendsPageState extends State<TrendsPage> {
               ),
               child: Column(
                 children: <Widget>[
-                  // const SizedBox(
-                  //   height: 40,
-                  // ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Padding(
-                  //       padding: const EdgeInsets.all(8.0),
-                  //       child: InkWell(
-                  //           onTap: () {
-                  //             Navigator.push(
-                  //               context,
-                  //               MaterialPageRoute(builder: (context) => const NavBar()),
-                  //             );
-                  //           }, // Image tapped
-                  //           child: const Icon(Icons.menu_rounded,color: Colors.grey,)
-                  //       ),
-                  //     ),
-                  //     const Spacer(),
-                  //     Text(AppLocalizations.of(context).translate('trends'),
-                  //         style: GoogleFonts.openSans(textStyle: const TextStyle(
-                  //         color: Colors.white,
-                  //         fontSize: 25,
-                  //         fontWeight: FontWeight.bold),)
-                  //     ),
-                  //     const Spacer(),
-                  //   ],
-                  // ),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
                   Row(
                     children: [
                       Padding(
@@ -339,7 +334,16 @@ class _TrendsPageState extends State<TrendsPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 25,)
+                  SizedBox(height: 25,),
+                  if(displayIframe == true)
+                    Container(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      height: 520,
+                      child : WebViewWidget(controller: controller),
+                    ),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
