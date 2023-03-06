@@ -70,7 +70,7 @@ class _FutPortSheet extends State<FutPortSheet>
       ));
       await remoteConfig.fetchAndActivate();
 
-      futLogo = remoteConfig.getString('bitFuture_image_url').trim();
+      futLogo = remoteConfig.getString('bitFuture_image_url_android').trim();
 
 
       setState(() {

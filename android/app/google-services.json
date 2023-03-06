@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1051528112442",
+    "project_id": "bitebitcoin-408a0",
+    "storage_bucket": "bitebitcoin-408a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051528112442:android:96a0a6332e41d268490803",
+        "android_client_info": {
+          "package_name": "com.btb.bitcoinfutureapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051528112442-o36rvsu0j4svt2h5r8ro1qg3hd8mg2bm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.btb.bitcoinfutureapp",
+            "certificate_hash": "80e4597c91b750ea3f4d548d3dc3104363501864"
+          }
+        },
+        {
+          "client_id": "1051528112442-0p81ar9t6kqse1hak3o5qivkde464pbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMPRTyllFE1KbLixM3ukFPJInygesQarw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051528112442-0p81ar9t6kqse1hak3o5qivkde464pbr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

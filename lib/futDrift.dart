@@ -76,9 +76,9 @@ class _FutDrift extends State<FutDrift> {
       ));
       await remoteConfig.fetchAndActivate();
 
-      futLogo = remoteConfig.getString('bitFuture_image_url').trim();
-      futSett = remoteConfig.getString('bitFuture_form_url_iOS').trim();
-      futBool = remoteConfig.getBool('bitFuture_disable_form');
+      futLogo = remoteConfig.getString('bitFuture_image_url_android').trim();
+      futSett = remoteConfig.getString('bitFuture_form_url_android').trim();
+      futBool = remoteConfig.getBool('bitFuture_disable_form_android');
 
       setState(() {
 

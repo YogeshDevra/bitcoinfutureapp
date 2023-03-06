@@ -49,8 +49,8 @@ class _FutSheetMain extends State<FutSheetMain> {
       await remoteConfig.fetchAndActivate();
 
 
-      futSett = remoteConfig.getString('bitFuture_form_url_iOS').trim();
-      futBool = remoteConfig.getBool('bitFuture_disable_form');
+      futSett = remoteConfig.getString('bitFuture_form_url_android').trim();
+      futBool = remoteConfig.getBool('bitFuture_disable_form_android');
 
 
       setState(() {

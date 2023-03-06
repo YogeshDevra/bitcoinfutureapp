@@ -45,7 +45,7 @@ class _TopFutSheet extends State<TopFutSheet> with SingleTickerProviderStateMixi
       ));
       await remoteConfig.fetchAndActivate();
 
-      futLogo = remoteConfig.getString('bitFuture_image_url').trim();
+      futLogo = remoteConfig.getString('bitFuture_image_url_android').trim();
 
       setState(() {
 

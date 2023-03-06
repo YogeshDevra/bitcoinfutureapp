@@ -45,7 +45,7 @@ class _LoserFut extends State<LoserFut> with SingleTickerProviderStateMixin{
       ));
       await remoteConfig.fetchAndActivate();
 
-      futLogo = remoteConfig.getString('bitFuture_image_url').trim();
+      futLogo = remoteConfig.getString('bitFuture_image_url_android').trim();
 
       setState(() {
 
