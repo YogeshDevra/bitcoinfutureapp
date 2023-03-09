@@ -174,7 +174,7 @@ class _TopFutSheet extends State<TopFutSheet> with SingleTickerProviderStateMixi
                               child: Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: FadeInImage(
-                                  placeholder: const AssetImage('assets/image/cob.png'),
+                                  placeholder: const AssetImage('futasst/futpic/cob.png'),
                                   image: NetworkImage("$futLogo/Bitcoin/resources/icons/${list[i].name!.toLowerCase()}.png"),
                                 ),
                               )

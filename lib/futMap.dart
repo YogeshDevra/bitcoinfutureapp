@@ -31,7 +31,7 @@ class FutMap extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: Image.asset("assets/image/logo_hor.png"),
+                child: Image.asset("futasst/futpic/logo_hor.png"),
               ),
               const SizedBox(
                 height: 10,
@@ -52,7 +52,7 @@ class FutMap extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Image.asset("assets/image/homepage.png"),
+                        Image.asset("futasst/futpic/homepage.png"),
                         const Spacer(),
                         Text(FutLang.of(context).translate('home'),textAlign: TextAlign.start,
                           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
@@ -76,7 +76,7 @@ class FutMap extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Image.asset("assets/image/up-arrow.png"),
+                        Image.asset("futasst/futpic/up-arrow.png"),
                         const Spacer(),
                         Text(FutLang.of(context).translate('top_coin'),textAlign: TextAlign.start,
                           softWrap: true,
@@ -101,7 +101,7 @@ class FutMap extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Image.asset("assets/image/Shape.png"),
+                        Image.asset("futasst/futpic/Shape.png"),
                         const Spacer(),
                         Text(FutLang.of(context).translate('portfolio'),textAlign: TextAlign.start,
                           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
@@ -125,7 +125,7 @@ class FutMap extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Image.asset("assets/image/Icon.png"),
+                        Image.asset("futasst/futpic/Icon.png"),
                         const Spacer(),
                         Text(FutLang.of(context).translate('coins'),textAlign: TextAlign.start,
                           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
@@ -149,7 +149,7 @@ class FutMap extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Image.asset("assets/image/Rise.png"),
+                        Image.asset("futasst/futpic/Rise.png"),
                         const Spacer(),
                         Text(FutLang.of(context).translate('trends'),textAlign: TextAlign.start,
                           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),

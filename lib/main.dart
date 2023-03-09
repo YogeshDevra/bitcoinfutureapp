@@ -93,12 +93,12 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: Alignment.center,
           children: [
             Image.asset(
-              'assets/image/Splash.png',
+              'futasst/futpic/Splash.png',
               fit: BoxFit.fitHeight,
               height: MediaQuery.of(context).size.height,
             ),
             Image.asset(
-              'assets/image/logo_ver.png',
+              'futasst/futpic/logo_ver.png',
               width: MediaQuery.of(context).size.width * .3,
             )
           ],

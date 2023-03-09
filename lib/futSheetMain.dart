@@ -119,14 +119,14 @@ class _FutSheetMain extends State<FutSheetMain> {
                     height: 600,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage("assets/image/back.png"),fit: BoxFit.fill
+                            image: AssetImage("futasst/futpic/back.png"),fit: BoxFit.fill
                         )
                     ),
                     child: Column(
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(10),
-                          child: Image.asset("assets/image/logo_hor.png"),
+                          child: Image.asset("futasst/futpic/logo_hor.png"),
                         ),
                         const SizedBox(
                           height: 50,
@@ -206,7 +206,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(15),
-                          child: Image.asset("assets/image/start.png"),
+                          child: Image.asset("futasst/futpic/start.png"),
                         ),
                         if(futBool == true)
                           Container(
@@ -240,7 +240,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.all(10),
-                                          child: Image.asset("assets/image/one.png"),
+                                          child: Image.asset("futasst/futpic/one.png"),
                                         ),
                                         Expanded(
                                           child: Padding(
@@ -264,7 +264,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.all(10),
-                                          child: Image.asset("assets/image/two.png"),
+                                          child: Image.asset("futasst/futpic/two.png"),
                                         ),
                                         Expanded(
                                           child: Padding(
@@ -288,7 +288,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.all(10),
-                                          child: Image.asset("assets/image/three.png"),
+                                          child: Image.asset("futasst/futpic/three.png"),
                                         ),
                                         Expanded(
                                           child: Padding(
@@ -312,7 +312,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.all(10),
-                                          child: Image.asset("assets/image/four.png"),
+                                          child: Image.asset("futasst/futpic/four.png"),
                                         ),
                                         Expanded(
                                           child: Padding(
@@ -361,7 +361,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                                 borderRadius: BorderRadius.circular(12)),
                             child: Column(
                               children: <Widget>[
-                                Image.asset("assets/image/bit.png",fit: BoxFit.cover,),
+                                Image.asset("futasst/futpic/bit.png",fit: BoxFit.cover,),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -422,7 +422,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                             decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(12)),
                             child: Column(
                               children: <Widget>[
-                                Image.asset("assets/image/eth.png",fit: BoxFit.fill,),
+                                Image.asset("futasst/futpic/eth.png",fit: BoxFit.fill,),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -483,7 +483,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                             decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(30)),
                             child: Column(
                               children: <Widget>[
-                                Image.asset("assets/image/tether.png",fit: BoxFit.fill,),
+                                Image.asset("futasst/futpic/tether.png",fit: BoxFit.fill,),
                                 const SizedBox(
                                   height: 10,
                                 ),
@@ -559,7 +559,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(10),
-                                child: Image.asset("assets/image/cup.png"),
+                                child: Image.asset("futasst/futpic/cup.png"),
                               ),
                               const SizedBox(width: 25),
                               Expanded(
@@ -591,7 +591,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(10),
-                                child: Image.asset("assets/image/port.png"),
+                                child: Image.asset("futasst/futpic/port.png"),
                               ),
                               const SizedBox(width: 25,),
                               Expanded(
@@ -623,7 +623,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(10),
-                                child: Image.asset("assets/image/Lock1.png"),
+                                child: Image.asset("futasst/futpic/Lock1.png"),
                               ),
                               const SizedBox(width: 25,),
                               Expanded(
@@ -655,7 +655,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                         Container(
                           decoration: const BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage("assets/image/CTA.png"),fit: BoxFit.fill
+                                  image: AssetImage("futasst/futpic/CTA.png"),fit: BoxFit.fill
                               )
                           ),
                           child: Column(
@@ -705,7 +705,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                                 ),
                                 Align(
                                   alignment: Alignment.center,
-                                  child: Image.asset("assets/image/Vector.png"),
+                                  child: Image.asset("futasst/futpic/Vector.png"),
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -775,7 +775,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                           padding: const EdgeInsets.all(15),
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Image.asset("assets/image/mid.png"),
+                            child: Image.asset("futasst/futpic/mid.png"),
                           ),
                         ),
                         const SizedBox(
@@ -809,7 +809,7 @@ class _FutSheetMain extends State<FutSheetMain> {
                           padding: const EdgeInsets.all(15),
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Image.asset("assets/image/end.png"),
+                            child: Image.asset("futasst/futpic/end.png"),
                           ),
                         ),
                         const SizedBox(

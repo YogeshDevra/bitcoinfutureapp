@@ -197,7 +197,7 @@ class _FutPortSheet extends State<FutPortSheet>
                                     //   maintainAnimation: true,
                                     //   maintainState: true,
                                     //   child: Image.asset(
-                                    //     'assets/image/Lock.png',
+                                    //     'futasst/futpic/Lock.png',
                                     //   ),
                                     //   replacement:
                                     InkWell(
@@ -205,7 +205,7 @@ class _FutPortSheet extends State<FutPortSheet>
                                         _showdeleteCoinFromPortfolioDialog(items[i]);
                                       },
                                       child: Image.asset(
-                                        'assets/image/trash-can.png',
+                                        'futasst/futpic/trash-can.png',
                                       ),
                                     ),
                                     // ),
@@ -355,7 +355,7 @@ class _FutPortSheet extends State<FutPortSheet>
                                               padding: const EdgeInsets.all(2.0),
                                               child: FadeInImage(
                                                 height: 70,
-                                                placeholder: const AssetImage('assets/image/cob.png'),
+                                                placeholder: const AssetImage('futasst/futpic/cob.png'),
                                                 image: NetworkImage(
                                                     "$futLogo/Bitcoin/resources/icons/${bitcoin.name!.toLowerCase()}.png"),
                                               ),
@@ -540,7 +540,7 @@ class _FutPortSheet extends State<FutPortSheet>
                                             padding: const EdgeInsets.all(2.0),
                                             child: FadeInImage(
                                               height: 70,
-                                              placeholder: const AssetImage('assets/image/cob.png'),
+                                              placeholder: const AssetImage('futasst/futpic/cob.png'),
                                               image: NetworkImage(
                                                   "$futLogo/Bitcoin/resources/icons/${item.name!.toLowerCase()}.png"),
                                             ),

@@ -140,7 +140,7 @@ class _FutDrift extends State<FutDrift> {
         child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image:AssetImage("assets/image/trends.png"),fit: BoxFit.fill
+                  image:AssetImage("futasst/futpic/trends.png"),fit: BoxFit.fill
               )
           ),
           child: Column(
@@ -468,7 +468,7 @@ class _FutDrift extends State<FutDrift> {
                                             child: Padding(
                                               padding: const EdgeInsets.all(2.0),
                                               child: FadeInImage(
-                                                placeholder: const AssetImage('assets/image/cob.png'),
+                                                placeholder: const AssetImage('futasst/futpic/cob.png'),
                                                 image: NetworkImage("$futLogo/Bitcoin/resources/icons/${name!.toLowerCase()}.png"),
                                               ),
                                             )
@@ -553,7 +553,7 @@ class _FutDrift extends State<FutDrift> {
                           //       padding: const EdgeInsets.all(10),
                           //       child: FadeInImage(
                           //         height: 70,
-                          //         placeholder: const AssetImage('assets/image/cob.png'),
+                          //         placeholder: const AssetImage('futasst/futpic/cob.png'),
                           //         image: NetworkImage(
                           //             "$URL/Bitcoin/resources/icons/${name!.toLowerCase()}.png"),
                           //       ),
