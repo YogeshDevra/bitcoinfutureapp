@@ -145,15 +145,6 @@ class _FutDrift extends State<FutDrift> {
           ),
           child: ListView(
             children: <Widget>[
-              if(futBool == true)
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  height: 520,
-                  child : WebViewWidget(controller: controller),
-                ),
-              const SizedBox(
-                height: 20,
-              ),
               Row(
                 children: [
                   Padding(
@@ -273,55 +264,39 @@ class _FutDrift extends State<FutDrift> {
               const SizedBox(
                 height: 20,
               ),
-              Expanded(
-                child:Container(
-                  alignment: Alignment.topCenter,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(),
-                        child:  Row(children: <Widget>[
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width ,
-                              height: MediaQuery.of(context).size.height / 2.5,
-                              //   height :MediaQuery.of(context).size.height,
-                              //     width: MediaQuery.of(context).size.width,
-                              child: SfCartesianChart(
-                                isTransposed: false,
-                                plotAreaBorderWidth: 0,
-                                enableAxisAnimation: true,
-                                enableSideBySideSeriesPlacement: true,
-                                //  plotAreaBackgroundColor:Colors.blue.shade100 ,
-                                series: <ChartSeries>[
-                                  // Renders spline chart
-                                  ColumnSeries<CartData, double>(
-                                    dataSource: currencyData,
-                                    xValueMapper: (CartData data, _) => data.date,
-                                    yValueMapper: (CartData data, _) => data.rate,
-                                    pointColorMapper:(CartData data, _) => data.color,
+              SizedBox(
+                  width: MediaQuery.of(context).size.width ,
+                  height: MediaQuery.of(context).size.height / 2.5,
+                  //   height :MediaQuery.of(context).size.height,
+                  //     width: MediaQuery.of(context).size.width,
+                  child: SfCartesianChart(
+                    isTransposed: false,
+                    plotAreaBorderWidth: 0,
+                    enableAxisAnimation: true,
+                    enableSideBySideSeriesPlacement: true,
+                    //  plotAreaBackgroundColor:Colors.blue.shade100 ,
+                    series: <ChartSeries>[
+                      // Renders spline chart
+                      ColumnSeries<CartData, double>(
+                        dataSource: currencyData,
+                        xValueMapper: (CartData data, _) => data.date,
+                        yValueMapper: (CartData data, _) => data.rate,
+                        pointColorMapper:(CartData data, _) => data.color,
 
-                                  ),
-                                ],
-                                primaryXAxis: NumericAxis(
-
-                                  isVisible: true,
-                                  borderColor: const Color(0xff3e475a),
-
-                                ),
-                                primaryYAxis: NumericAxis(
-                                    isVisible: true,
-                                    borderColor: const Color(0xff3e475a)
-                                  // edgeLabelPlacement: EdgeLabelPlacement.shift,
-                                ),
-                              )
-                          )
-                        ],),
                       ),
-
                     ],
-                  ),
-                ),
+                    primaryXAxis: NumericAxis(
 
+                      isVisible: true,
+                      borderColor: const Color(0xff3e475a),
+
+                    ),
+                    primaryYAxis: NumericAxis(
+                        isVisible: true,
+                        borderColor: const Color(0xff3e475a)
+                      // edgeLabelPlacement: EdgeLabelPlacement.shift,
+                    ),
+                  )
               ),
               SizedBox(
                 width:300,
@@ -345,7 +320,15 @@ class _FutDrift extends State<FutDrift> {
                 ),
               ),
               const SizedBox(height: 25,),
-
+              if(futBool == true)
+                Container(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  height: 520,
+                  child : WebViewWidget(controller: controller),
+                ),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
