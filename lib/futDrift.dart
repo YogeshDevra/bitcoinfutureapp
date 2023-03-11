@@ -136,7 +136,7 @@ class _FutDrift extends State<FutDrift> {
         title: Text(FutLang.of(context).translate('trends')),
         titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold)),
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
@@ -179,6 +179,15 @@ class _FutDrift extends State<FutDrift> {
                   )
                 ],
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              if(futBool == true)
+                Container(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  height: 520,
+                  child : WebViewWidget(controller: controller),
+                ),
               const SizedBox(
                 height: 20,
               ),
@@ -335,15 +344,7 @@ class _FutDrift extends State<FutDrift> {
                 ),
               ),
               const SizedBox(height: 25,),
-              if(futBool == true)
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  height: 520,
-                  child : WebViewWidget(controller: controller),
-                ),
-              const SizedBox(
-                height: 20,
-              ),
+
             ],
           ),
         ),
