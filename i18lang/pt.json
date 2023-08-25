@@ -1,4 +1,4 @@
-  {
+{
 	
   "top_coin": "Principais moedas",
   "coins" : "Moedas",
@@ -8,6 +8,7 @@
   "top_gain": "Top Gainers",
   "top_lose" : "Top Looser",
   "gain": "Ganhador",
+  "data_found": "Nenhum dado encontrado",
   "lose": "Perdedor",
   "trans": "Tradução",
   "home" : "Casa",

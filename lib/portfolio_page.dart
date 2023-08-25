@@ -30,7 +30,6 @@ class _PortfolioPageState extends State<PortfolioPage>
   num _size = 0;
   double totalValuesOfPortfolio = 0.0;
   final _formKey = GlobalKey<FormState>();
-  bool _isShow = true;
   String? image;
   String? URL;
   var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -43,6 +42,9 @@ class _PortfolioPageState extends State<PortfolioPage>
 
   @override
   void initState() {
+    setState(() {
+      isLoading = true;
+    });
     fetchRemoteValue();
     coinCountTextEditingController = TextEditingController();
     coinCountEditTextEditingController = TextEditingController();
@@ -89,6 +91,7 @@ class _PortfolioPageState extends State<PortfolioPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff111622),
       appBar: AppBar(
         leading:Padding(
           padding: const EdgeInsets.all(4.0),
@@ -111,7 +114,9 @@ class _PortfolioPageState extends State<PortfolioPage>
         title: Text(AppLocalizations.of(context).translate('portfolio')),
         titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold)),
       ),
-      body: Container(
+      body: isLoading == true
+          ?const Center(child: CircularProgressIndicator(color: Colors.blue,),)
+          :Container(
           width: double.infinity,
           decoration: const BoxDecoration(
               color: Color(0xff111622)
@@ -299,6 +304,26 @@ class _PortfolioPageState extends State<PortfolioPage>
         builder: (ctxt) => SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Scaffold(
+            appBar: AppBar(
+              leading:Padding(
+                padding: EdgeInsets.all(10),
+                child: InkWell(
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              elevation: 0,
+              backgroundColor: const Color(0xff111622),
+              centerTitle: true,
+              title: Text(AppLocalizations.of(context).translate('update_coins')),
+              titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(
+                  fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),),
+            ),
             body: Container(
               decoration: const BoxDecoration(color: Color(0xff1a202e)),
               child: ListView(
@@ -309,31 +334,6 @@ class _PortfolioPageState extends State<PortfolioPage>
                         children: [
                           const SizedBox(
                             height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                InkWell(
-                                  child: const Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Colors.white,
-                                  ),
-                                  onTap: (){
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                                const SizedBox(
-                                  width: 100,
-                                ),
-                                Text(AppLocalizations.of(context).translate('update_coins'),
-                                  style: const TextStyle(
-                                      fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
-                                  textAlign: TextAlign.start,
-                                ),
-
-                              ],
-                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top:50),
@@ -478,6 +478,26 @@ class _PortfolioPageState extends State<PortfolioPage>
         builder: (ctxt) => SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Scaffold(
+            appBar: AppBar(
+              leading:Padding(
+                padding: EdgeInsets.all(10),
+                child: InkWell(
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              elevation: 0,
+              backgroundColor: const Color(0xff111622),
+              centerTitle: true,
+              title: Text(AppLocalizations.of(context).translate('remove_coins')),
+              titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(
+                  fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),),
+            ),
             body: Container(
               decoration: const BoxDecoration(color: Color(0xff1a202e)),
               child: ListView(
@@ -485,31 +505,6 @@ class _PortfolioPageState extends State<PortfolioPage>
                     Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              InkWell(
-                                child: const Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Colors.white,
-                                ),
-                                onTap: (){
-                                  Navigator.pop(context);
-                                },
-                              ),
-                              const SizedBox(
-                                width: 100,
-                              ),
-                              Text(AppLocalizations.of(context).translate('remove_coins'),
-                                style: const TextStyle(
-                                    fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
-                                textAlign: TextAlign.start,
-                              ),
-
-                            ],
-                          ),
-                        ),
                         Padding(
                           padding: const EdgeInsets.all(20),
                           child: Container(

@@ -51,11 +51,17 @@ class NavBar extends StatelessWidget {
                     child: Row(
                       children: [
                         Image.asset("assets/image/homepage.png"),
-                        const Spacer(),
-                        Text(AppLocalizations.of(context).translate('home'),textAlign: TextAlign.start,
-                          style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                        const SizedBox(
+                          width: 30,
                         ),
-                        const Spacer(),
+                        Flexible(
+                          child:Text(AppLocalizations.of(context).translate('home'),textAlign: TextAlign.start,softWrap: true,
+                            style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
                       ],
                     ),
                   ),
@@ -75,12 +81,18 @@ class NavBar extends StatelessWidget {
                     child: Row(
                       children: [
                         Image.asset("assets/image/up-arrow.png"),
-                        const Spacer(),
-                        Text(AppLocalizations.of(context).translate('top_coin'),textAlign: TextAlign.start,
-                          softWrap: true,
-                          style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                        const SizedBox(
+                          width: 30,
                         ),
-                        const Spacer() ,
+                        Flexible(
+                          child:Text(AppLocalizations.of(context).translate('top_coin'),textAlign: TextAlign.start,
+                            softWrap: true,
+                            style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
                       ],
                     ),
                   ),
@@ -100,11 +112,17 @@ class NavBar extends StatelessWidget {
                     child: Row(
                       children: [
                         Image.asset("assets/image/Shape.png"),
-                        const Spacer(),
-                        Text(AppLocalizations.of(context).translate('portfolio'),textAlign: TextAlign.start,
-                          style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                        const SizedBox(
+                          width: 30,
                         ),
-                        const Spacer(),
+                        Flexible(
+                          child: Text(AppLocalizations.of(context).translate('portfolio'),textAlign: TextAlign.start,softWrap: true,
+                            style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
                       ],
                     ),
                   ),
@@ -124,11 +142,17 @@ class NavBar extends StatelessWidget {
                     child: Row(
                       children: [
                         Image.asset("assets/image/Icon.png"),
-                        const Spacer(),
-                        Text(AppLocalizations.of(context).translate('coins'),textAlign: TextAlign.start,
-                          style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                        const SizedBox(
+                          width: 30,
                         ),
-                        const Spacer(),
+                        Flexible(
+                          child: Text(AppLocalizations.of(context).translate('coins'),textAlign: TextAlign.start,softWrap: true,
+                            style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
                       ],
                     ),
                   ),
@@ -140,7 +164,7 @@ class NavBar extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TrendsPage()),
+                      MaterialPageRoute(builder: (context) => const TrendsPage()),
                     );
                   }, // Image tapped
                   child: Padding(
@@ -148,11 +172,17 @@ class NavBar extends StatelessWidget {
                     child: Row(
                       children: [
                         Image.asset("assets/image/Rise.png"),
-                        const Spacer(),
-                        Text(AppLocalizations.of(context).translate('trends'),textAlign: TextAlign.start,
-                          style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                        const SizedBox(
+                          width: 30,
                         ),
-                        const Spacer(),
+                        Flexible(
+                          child: Text(AppLocalizations.of(context).translate('trends'),textAlign: TextAlign.start,softWrap: true,
+                            style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
                       ],
                     ),
                   ),
@@ -164,7 +194,7 @@ class NavBar extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => NativeReLocation()),
+                      MaterialPageRoute(builder: (context) => const NativeReLocation()),
                     );
                   }, // Image tapped
                   child: Padding(
@@ -176,11 +206,17 @@ class NavBar extends StatelessWidget {
                           color: Color(0xff6D778B),
                           size: 25,
                         ),
-                        const Spacer(),
-                        Text(AppLocalizations.of(context).translate('trans'),textAlign: TextAlign.start,
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Flexible(
+                          child: Text(AppLocalizations.of(context).translate('trans'),textAlign: TextAlign.start,
                           style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w400,fontSize: 20),
                         ),
-                        const Spacer(),
+                        ),
+                        const SizedBox(
+                          width: 0,
+                        ),
                       ],
                     ),
                   ),

@@ -1,4 +1,4 @@
-  {
+{
 	
   "top_coin": "Le migliori monete",
   "coins": "monete",
@@ -11,6 +11,7 @@
   "lose": "Perdente",
   "trans": "Traduzione",
   "home": "Casa",
+  "data_found": "Nessun dato trovato",
   "no_coins_added": "monete aggiunte",
   "select": "Seleziona lingua",
   "cancel": "Annulla",

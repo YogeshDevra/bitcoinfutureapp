@@ -1,4 +1,4 @@
-  {
+{
 	
   "top_coin": "Meilleures pièces",
   "coins" : "Pièces de monnaie",
@@ -12,6 +12,7 @@
   "trans": "Traduction",
   "home" : "Domicile",
   "search" : "Rechercher",
+  "data_found" : "Aucune donnée trouvée",
   "no_coins_added" : "Pièces ajoutées",
   "select" : "Choisir la langue",
   "cancel" : "Annuler",

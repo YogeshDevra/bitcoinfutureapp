@@ -4,13 +4,11 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'Navbar.dart';
+import 'iframePage.dart';
 import 'localization/app_localization.dart';
 import 'models/Bitcoin.dart';
 import 'models/TopCoinData.dart';
-
-import 'trendsPage.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -25,17 +23,17 @@ class _DashboardPageState extends State<DashboardPage> {
 
   bool isLoading = false;
   SharedPreferences? sharedPreferences;
-  String? iFrameUrl;
   List<Bitcoin> bitcoinList = [];
   List<Bitcoin> gainerLooserCoinList = [];
   List<TopCoinData> topCoinList = [];
-  bool? displayIframe;
-  late WebViewController controller;
+  bool displayIframe = false;
 
 
   @override
   void initState() {
-
+    setState(() {
+      isLoading = true;
+    });
     fetchRemoteValue();
     _controllerList = ScrollController();
     super.initState();
@@ -54,38 +52,15 @@ class _DashboardPageState extends State<DashboardPage> {
       ));
       await remoteConfig.fetchAndActivate();
 
-
-      iFrameUrl = remoteConfig.getString('bitFuture_form_url_iOS').trim();
       displayIframe = remoteConfig.getBool('bitFuture_disable_form');
 
-      print(iFrameUrl);
-      setState(() {
-
-      });
     } catch (exception) {
       print('Unable to fetch remote config. Cached or default values will be '
           'used');
     }
-    controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000))
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith(iFrameUrl!)) {
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse(iFrameUrl!));
+    setState(() {
+      isLoading = false;
+    });
   }
 
 
@@ -93,6 +68,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff111622),
       appBar: AppBar(
         leading:Padding(
           padding: const EdgeInsets.all(4.0),
@@ -115,7 +91,11 @@ class _DashboardPageState extends State<DashboardPage> {
         title: Text(AppLocalizations.of(context).translate('home')),
         titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold)),
       ),
-      body:ListView(
+      body:isLoading == true
+          ?const Center(child: CircularProgressIndicator(color: Colors.blue,),)
+          :displayIframe == true && isLoading == false
+          ? IframeHomePage()
+          : ListView(
         controller:_controllerList,
         children: <Widget>[
           Container(
@@ -214,127 +194,6 @@ class _DashboardPageState extends State<DashboardPage> {
                           padding: const EdgeInsets.all(15),
                           child: Image.asset("assets/image/start.png"),
                         ),
-                        if(displayIframe == true)
-                          Container(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            height: 520,
-                            child : WebViewWidget(controller: controller),
-                          ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        if(displayIframe == true)
-                          Container(
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(AppLocalizations.of(context).translate('homesen7'),textAlign: TextAlign.left,
-                                      style: const TextStyle(color: Color(0xffef443b),fontSize: 25,fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Container(
-                                    decoration: BoxDecoration(color: const Color(0xff160e33),
-                                        borderRadius: BorderRadius.circular(20)
-                                    ),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Image.asset("assets/image/one.png"),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: Text(AppLocalizations.of(context).translate('homesen8'),
-                                              style: const TextStyle(color: Color(0xffef443b),fontSize: 20,fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Container(
-                                    decoration: BoxDecoration(color: const Color(0xff160e33),
-                                        borderRadius: BorderRadius.circular(20)
-                                    ),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Image.asset("assets/image/two.png"),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: Text(AppLocalizations.of(context).translate('homesen9'),
-                                              style: const TextStyle(color: Color(0xffef443b),fontSize: 20,fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Container(
-                                    decoration: BoxDecoration(color: const Color(0xff160e33),
-                                        borderRadius: BorderRadius.circular(20)
-                                    ),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Image.asset("assets/image/three.png"),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: Text(AppLocalizations.of(context).translate('homesen10'),
-                                              style: const TextStyle(color: Color(0xffef443b),fontSize: 20,fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Container(
-                                    decoration: BoxDecoration(color: const Color(0xff160e33),
-                                        borderRadius: BorderRadius.circular(20)
-                                    ),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(10),
-                                          child: Image.asset("assets/image/four.png"),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: Text(AppLocalizations.of(context).translate('homesen11'),
-                                              style: const TextStyle(color: Color(0xffef443b),fontSize: 20,fontWeight: FontWeight.w400),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -389,34 +248,38 @@ class _DashboardPageState extends State<DashboardPage> {
                                 Row(
                                   children: [
                                     const Padding(
-                                      padding: EdgeInsets.all(15),
+                                      padding: EdgeInsets.all(10),
                                       child: Text("\$22,907",textAlign: TextAlign.left,
                                         style: TextStyle(color: Color(0xffef443b),fontSize: 30,fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    const Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                    const SizedBox(
+                                      width: 30,
+                                    ),
+                                    Flexible(
                                       child: InkWell(
                                         onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => TrendsPage()),
-                                          );
+                                          callCurrencyDetails("BTC");
                                         }, // Image tapped
                                         child: Container(
-                                          decoration: BoxDecoration(color: const Color(0xffef443b),
-                                              borderRadius: BorderRadius.circular(30)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15),
-                                            child: Text(AppLocalizations.of(context).translate('homesen16'),textAlign: TextAlign.center,
-                                              style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),
-                                            ),
-                                          ),
+                                            decoration: BoxDecoration(color: const Color(0xffef443b),
+                                                borderRadius: BorderRadius.circular(20)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(5),
+                                              child: Text(AppLocalizations.of(context).translate('homesen16'),textAlign: TextAlign.center,softWrap: true,
+                                                style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),
+                                              ),
+                                            )
                                         ),
                                       ),
                                     ),
+                                    const SizedBox(
+                                      width: 30,
+                                    ),
                                   ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
                                 ),
                               ],
                             ),
@@ -450,34 +313,38 @@ class _DashboardPageState extends State<DashboardPage> {
                                 Row(
                                   children: [
                                     const Padding(
-                                      padding: EdgeInsets.all(15),
+                                      padding: EdgeInsets.all(10),
                                       child: Text("\$1,649",textAlign: TextAlign.left,
                                         style: TextStyle(color: Color(0xffef443b),fontSize: 30,fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    const Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                    const SizedBox(
+                                      width: 30,
+                                    ),
+                                    Flexible(
                                       child: InkWell(
                                         onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => TrendsPage()),
-                                          );
+                                          callCurrencyDetails("ETH");
                                         }, // Image tapped
                                         child: Container(
-                                          decoration: BoxDecoration(color: const Color(0xffef443b),
-                                              borderRadius: BorderRadius.circular(30)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15),
-                                            child: Text(AppLocalizations.of(context).translate('homesen16'),textAlign: TextAlign.center,
-                                              style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),
-                                            ),
-                                          ),
+                                            decoration: BoxDecoration(color: const Color(0xffef443b),
+                                                borderRadius: BorderRadius.circular(20)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(5),
+                                              child: Text(AppLocalizations.of(context).translate('homesen16'),textAlign: TextAlign.center,softWrap: true,
+                                                style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),
+                                              ),
+                                            )
                                         ),
                                       ),
                                     ),
+                                    const SizedBox(
+                                      width: 30,
+                                    ),
                                   ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
                                 ),
                               ],
                             ),
@@ -511,33 +378,38 @@ class _DashboardPageState extends State<DashboardPage> {
                                 Row(
                                   children: [
                                     const Padding(
-                                      padding: EdgeInsets.all(15),
+                                      padding: EdgeInsets.all(10),
                                       child: Text("\$1.00",textAlign: TextAlign.left,
                                         style: TextStyle(color: Color(0xffef443b),fontSize: 30,fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    const Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                    const SizedBox(
+                                      width: 30,
+                                    ),
+                                    Flexible(
                                       child: InkWell(
                                         onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => TrendsPage()),
-                                          );
+                                          callCurrencyDetails("DSH");
                                         }, // Image tapped
                                         child: Container(
-                                          decoration: BoxDecoration(color: const Color(0xffef443b),borderRadius: BorderRadius.circular(30)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15),
-                                            child: Text(AppLocalizations.of(context).translate('homesen16'),textAlign: TextAlign.center,
-                                              style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),
-                                            ),
-                                          ),
+                                            decoration: BoxDecoration(color: const Color(0xffef443b),
+                                                borderRadius: BorderRadius.circular(20)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(5),
+                                              child: Text(AppLocalizations.of(context).translate('homesen16'),textAlign: TextAlign.center,softWrap: true,
+                                                style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22),
+                                              ),
+                                            )
                                         ),
                                       ),
                                     ),
+                                    const SizedBox(
+                                      width: 30,
+                                    ),
                                   ],
+                                ),
+                                const SizedBox(
+                                  height: 5,
                                 ),
                               ],
                             ),
@@ -567,7 +439,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 padding: const EdgeInsets.all(10),
                                 child: Image.asset("assets/image/cup.png"),
                               ),
-                              SizedBox(width: 25),
+                              const SizedBox(width: 25),
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
@@ -589,7 +461,6 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Row(
@@ -599,7 +470,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 padding: const EdgeInsets.all(10),
                                 child: Image.asset("assets/image/port.png"),
                               ),
-                              SizedBox(width: 25,),
+                              const SizedBox(width: 25,),
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
@@ -621,7 +492,6 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(10),
                           child: Row(
@@ -631,7 +501,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 padding: const EdgeInsets.all(10),
                                 child: Image.asset("assets/image/Lock1.png"),
                               ),
-                              SizedBox(width: 25,),
+                              const SizedBox(width: 25,),
                               Expanded(
                                 child:  Padding(
                                   padding: const EdgeInsets.all(10),
@@ -653,11 +523,9 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ),
                         ),
-
                         const SizedBox(
                           height: 20,
                         ),
-
                         Container(
                           decoration: const BoxDecoration(
                               image: DecorationImage(
@@ -675,11 +543,9 @@ class _DashboardPageState extends State<DashboardPage> {
                             ],
                           ),
                         ),
-
                         const SizedBox(
                           height: 30,
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(20),
                           child: Text(AppLocalizations.of(context).translate('homesen30'),textAlign: TextAlign.center,
@@ -874,5 +740,21 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
   }
+
+  _saveProfileData(String name) async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      sharedPreferences!.setString("currencyName", name);
+      sharedPreferences!.setString("title", AppLocalizations.of(context).translate('trends'));
+      sharedPreferences!.commit();
+    });
+
+    Navigator.pushNamedAndRemoveUntil(context, '/trendPage', (r) => false);
+  }
+
+  Future<void> callCurrencyDetails(name) async {
+    _saveProfileData(name);
+  }
+
 }
 

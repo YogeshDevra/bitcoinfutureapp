@@ -1,4 +1,4 @@
-  {
+{
 	
   "top_coin": "Huippukolikot",
   "coins" : "Kolikot",
@@ -10,6 +10,7 @@
   "gain": "Gainer",
   "lose": "Häviäjä",
   "trans": "Käännös",
+  "data_found" : "Tietoja ei löydy",
   "home" : "Koti",
   "search" : "Hae",
   "no_coins_added" : "Kolikot lisätty",

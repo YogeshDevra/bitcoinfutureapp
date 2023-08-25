@@ -1,4 +1,4 @@
-  {
+{
 	
   "top_coin": "Top Coins",
   "coins" : "Coins",
@@ -19,6 +19,7 @@
   "enter_coins" : "Enter Number of Coins",
   "invalid_coins" : "At least 1 coin should be added",
   "remove" : "Remove",
+  "data_found" : "No Data Found",
   "remove_coins" : "Remove Coins",
   "update_coins" : "Update Coins",
   "do_you": "Do you want to remove coin from portfolio. Permanently ?",
@@ -54,7 +55,7 @@
   "homesen28": "All of the data in our app is based on real-time market data since Bitcoin Future replicates the actual cryptocurrency market and wants users to be able to speculate on it.",
   "homesen29": "Become a Part of Bitcoin Future Today!",
   "homesen30": "What our users say",
-  "homesen31": "Utilizing our software has produced remarkable outcomes! People learn a lot in a short period of time; see the testimonies.",
+  "homesen31": "Utilizing our Bitcoin Future App has produced remarkable outcomes! People learn a lot in a short period of time; see the testimonies.",
   "homesen32": "\"I was depressed after losing my job and on the verge of suicide when I made the decision to speculate on the Bitcoin Future. It ended up being the wisest choice I've ever made. Now that I've gained my skills, I can make thousands of euros per day and live more comfortably than before.\"",
   "homesen33": "Samantha K.",
   "homesen34": "Profit: €6,379.66",

@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Navbar.dart';
+import 'analFutBit.dart';
 import 'localization/app_localization.dart';
 import 'loser.dart';
 import 'models/Bitcoin.dart';
@@ -28,7 +29,10 @@ class _TopGainer extends State<TopGainer> with SingleTickerProviderStateMixin{
 
   @override
   void initState() {
-
+    AnalFutBit.futCurScnBit(AnalFutBit.Fut_Gan_Bit_Scn, "Bitcoin Future Top Coin Page");
+      setState(() {
+        isLoading = true;
+      });
     fetchRemoteValue();
     super.initState();
   }
@@ -129,7 +133,9 @@ class _TopGainer extends State<TopGainer> with SingleTickerProviderStateMixin{
                     ),
                     Expanded(
                         child: Container(
-                          child: topGainer(),
+                          child: isLoading == true
+                              ?const Center(child: CircularProgressIndicator(color: Colors.blue,),)
+                              : topGainer(),
                         )
                     ),
 
@@ -146,16 +152,17 @@ class _TopGainer extends State<TopGainer> with SingleTickerProviderStateMixin{
   Widget topGainer(){
     var list = topLooserAndGainerList.where((element) => double.parse(element.diffRate!)>= 0).toList();
 
-    return ListView.builder(
+    return list.isNotEmpty
+      ? ListView.builder(
         shrinkWrap: true,
         physics: const ScrollPhysics(),
         itemCount: list.length,
         itemBuilder: (BuildContext context, int i) {
           return InkWell(
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(5),
               child: Container(
-                decoration: BoxDecoration(border: Border(top: BorderSide(width: 2,color: Colors.red))),
+                decoration: const BoxDecoration(border: Border(top: BorderSide(width: 2,color: Colors.red))),
                 // color: Color(0xff1A202E),
                 child: Container(
                   height: 80,
@@ -170,17 +177,17 @@ class _TopGainer extends State<TopGainer> with SingleTickerProviderStateMixin{
                         CrossAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                              height: 70,
+                              height: 60,
                               child: Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: FadeInImage(
                                   placeholder: const AssetImage('assets/image/cob.png'),
-                                  image: NetworkImage("$URL/Bitcoin/resources/icons/${list[i].name!.toLowerCase()}.png"),
+                                  image: NetworkImage("https://assets.coinlayer.com/icons/${list[i].name!.toUpperCase()}.png"),
                                 ),
                               )
                           ),
                           const SizedBox(
-                            width: 15,
+                            width: 5,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -191,7 +198,7 @@ class _TopGainer extends State<TopGainer> with SingleTickerProviderStateMixin{
                                 child: Text(
                                   '${list[i].name}',
                                   style: GoogleFonts.poppins(
-                                      textStyle:  const TextStyle(fontWeight: FontWeight.normal,fontSize: 24,color: Colors.white)
+                                      textStyle:  const TextStyle(fontWeight: FontWeight.normal,fontSize: 20,color: Colors.white)
                                   ),
                                   textAlign: TextAlign.left,
                                 ),
@@ -291,7 +298,10 @@ class _TopGainer extends State<TopGainer> with SingleTickerProviderStateMixin{
               callCurrencyDetails(topLooserAndGainerList[i].name);
             },
           );
-        });
+        })
+      :  Center(
+      child: Text(AppLocalizations.of(context).translate('data_found'),style: const TextStyle(color: Colors.white,fontFamily: 'Manrope',fontSize: 24),),
+    );
   }
 
   List<charts.Series<LinearSales, int>> _createSampleData(

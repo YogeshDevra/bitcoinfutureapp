@@ -1,4 +1,4 @@
-  {
+{
   "top_coin": "Top mynter",
   "coins" : "Mynter",
   "portfolio" : "Portefølje",
@@ -10,6 +10,7 @@
   "lose": "Taper",
   "trans": "Oversettelse",
   "home" : "Hjem",
+  "data_found" : "Ingen data funnet",
   "search" : "Søk",
   "no_coins_added" : "Mynter lagt til",
   "select" : "Velg språk",

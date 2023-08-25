@@ -1,4 +1,4 @@
-  {
+{
 	
   "top_coin": "Monedas principales",
   "coins" : "Monedas",
@@ -15,6 +15,7 @@
   "no_coins_added" : "Monedas añadidas",
   "select" : "Seleccione el idioma",
   "cancel" : "Cancelar",
+  "data_found": "No se encontraron datos",
   "add_coins" : "Añadir monedas",
   "enter_coins" : "Ingrese el número de monedas",
   "invalid_coins" : "Se debe agregar al menos 1 moneda",

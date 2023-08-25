@@ -1,10 +1,13 @@
 // ignore_for_file: depend_on_referenced_packages, library_private_types_in_public_api
-import 'package:firebase_core/firebase_core.dart';
 
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'dashboard_home.dart';
 import 'localization/AppLanguage.dart';
 import 'localization/app_localization.dart';
 import 'portfolio_page.dart';
@@ -22,9 +25,9 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   final AppLanguage? appLanguage;
-  const MyApp({super.key, this.appLanguage});
+  MyApp({super.key, this.appLanguage});
 
-  // final FirebaseAnalytics analytics = FirebaseAnalytics();
+  final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,6 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             navigatorObservers: const [
-              // FirebaseAnalyticsObserver(analytics: analytics)
             ],
             title: 'Bitcoin Future App',
             theme: ThemeData(
@@ -63,12 +65,14 @@ class MyApp extends StatelessWidget {
             ],
             routes: <String, WidgetBuilder>{
               '/myHomePage': (BuildContext context) => const MyHomePage(),
-              '/homePage': (BuildContext context) => TrendsPage(),
+              '/homePage': (BuildContext context) => const DashboardPage(),
               '/portPage': (BuildContext context) => const PortfolioPage(),
-              '/trendPage': (BuildContext context) => TrendsPage(),
+              '/trendPage': (BuildContext context) => const TrendsPage(),
 
             },
-            home: const MyHomePage(),
+            home: Provider<FirebaseAnalytics>(
+              create: (context) => analytics,child: const MyHomePage(),
+            ),
           );
         },
       ),

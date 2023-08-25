@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'Navbar.dart';
+import 'analFutBit.dart';
 import 'dashboard_helper.dart';
 import 'localization/app_localization.dart';
 import 'models/Bitcoin.dart';
@@ -26,6 +26,7 @@ class TrendsPage extends StatefulWidget {
 }
 
 class _TrendsPageState extends State<TrendsPage> {
+
   Future<SharedPreferences> _sprefs = SharedPreferences.getInstance();
   List<Bitcoin> bitcoinDataList = [];
   double diffRate = 0;
@@ -40,10 +41,7 @@ class _TrendsPageState extends State<TrendsPage> {
   final _formKey2 = GlobalKey<FormState>();
   String? currencyNameForImage;
   double totalValuesOfPortfolio = 0.0;
-  String? iFrameUrl;
-  bool? displayIframe;
   SharedPreferences? sharedPreferences;
-  late WebViewController controller;
 
   TextEditingController? coinCountTextEditingController;
   TextEditingController? coinCountEditTextEditingController;
@@ -52,7 +50,12 @@ class _TrendsPageState extends State<TrendsPage> {
 
   @override
   void initState() {
+    setState(() {
+      isLoading = true;
+    });
     fetchRemoteValue();
+    AnalFutBit.futCurScnBit(AnalFutBit.Fut_Trd_Bit_Scn, "Bitcoin Future Trend Page");
+
     coinCountTextEditingController = TextEditingController();
     coinCountEditTextEditingController = TextEditingController();
     dbHelper.queryAllRows().then((notes) {
@@ -77,40 +80,22 @@ class _TrendsPageState extends State<TrendsPage> {
       await remoteConfig.fetchAndActivate();
 
       URL = remoteConfig.getString('bitFuture_image_url').trim();
-      iFrameUrl = remoteConfig.getString('bitFuture_form_url_iOS').trim();
-      displayIframe = remoteConfig.getBool('bitFuture_disable_form');
 
       setState(() {
 
       });
     } catch (exception) {
+      print('Unable to fetch remote config. Cached or default values will be '
+          'used');
     }
+
     callGraphApi();
-    controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000))
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
-          onWebResourceError: (WebResourceError error) {},
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith(iFrameUrl!)) {
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
-        ),
-      )
-      ..loadRequest(Uri.parse(iFrameUrl!));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff111622),
       appBar: AppBar(
         leading:Padding(
           padding: const EdgeInsets.all(4.0),
@@ -136,7 +121,9 @@ class _TrendsPageState extends State<TrendsPage> {
         title: Text(AppLocalizations.of(context).translate('trends')),
         titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold)),
       ),
-      body: SafeArea(
+      body: isLoading == true
+          ?const Center(child: CircularProgressIndicator(color: Colors.blue,),)
+          :SafeArea(
         child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -159,18 +146,18 @@ class _TrendsPageState extends State<TrendsPage> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(5),
                               child: Text(name,textAlign: TextAlign.left,
-                                style: const TextStyle(color: Colors.white,fontSize: 15,fontWeight: FontWeight.w400),
+                                style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w400),
                               )
                             ),
                             Padding(
-                                padding: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(5),
                                 child: Row(
                                   children: <Widget>[
                                     Text(diffRate < 0 ? '-' : "+", style: TextStyle(fontSize: 16, color: diffRate < 0 ? Colors.red : Colors.green)),
                                     Icon(Icons.attach_money, size: 16, color: diffRate < 0 ? Colors.red : Colors.green),
-                                    Text(result, style: TextStyle(fontSize: 16, color: diffRate < 0 ? Colors.red : Colors.green)),
+                                    Text('${double.parse(result).toStringAsFixed(2)}', style: TextStyle(fontSize: 16, color: diffRate < 0 ? Colors.red : Colors.green)),
                                   ],
                                 ),
                             ),
@@ -284,7 +271,7 @@ class _TrendsPageState extends State<TrendsPage> {
                                     //  plotAreaBackgroundColor:Colors.blue.shade100 ,
                                     series: <ChartSeries>[
                                       // Renders spline chart
-                                      ColumnSeries<CartData, double>(
+                                      ColumnSeries<CartData, String>(
                                         dataSource: currencyData,
                                         xValueMapper: (CartData data, _) => data.date,
                                         yValueMapper: (CartData data, _) => data.rate,
@@ -292,8 +279,7 @@ class _TrendsPageState extends State<TrendsPage> {
 
                                       ),
                                     ],
-                                    primaryXAxis: NumericAxis(
-
+                                    primaryXAxis: CategoryAxis(
                                       isVisible: true,
                                       borderColor: const Color(0xff3e475a),
 
@@ -335,15 +321,6 @@ class _TrendsPageState extends State<TrendsPage> {
                     ),
                   ),
                   SizedBox(height: 25,),
-                  if(displayIframe == true)
-                    Container(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      height: 520,
-                      child : WebViewWidget(controller: controller),
-                    ),
-                  SizedBox(
-                    height: 20,
-                  ),
                 ],
               ),
             ),
@@ -353,9 +330,6 @@ class _TrendsPageState extends State<TrendsPage> {
 
 
   Future<void> callGraphApi() async {
-    setState(() {
-      isLoading = true;
-    });
     final SharedPreferences prefs = await _sprefs;
     var currencyName = prefs.getString("currencyName") ?? 'BTC';
     currencyNameForImage = currencyName;
@@ -381,7 +355,7 @@ class _TrendsPageState extends State<TrendsPage> {
 
         currencyData = [];
         for (var element in bitcoinDataList) {
-          currencyData.add(CartData(count, element.rate!,color));
+          currencyData.add(CartData(element.date!, element.rate!,color));
           name = element.name!;
           String step2 = element.rate!.toStringAsFixed(2);
           double step3 = double.parse(step2);
@@ -405,6 +379,26 @@ class _TrendsPageState extends State<TrendsPage> {
         builder: (ctxt) => SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Scaffold(
+            appBar: AppBar(
+              leading:Padding(
+                padding: EdgeInsets.all(10),
+                child: InkWell(
+                  child: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+              elevation: 0,
+              backgroundColor: const Color(0xff111622),
+              centerTitle: true,
+              title: Text(AppLocalizations.of(context).translate('add_coins')),
+              titleTextStyle: GoogleFonts.openSans(textStyle: const TextStyle(
+                  fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),),
+            ),
             body: Container(
               decoration: const BoxDecoration(color: Color(0xff1a202e)
               ),
@@ -413,32 +407,6 @@ class _TrendsPageState extends State<TrendsPage> {
                 children: [
                   Column(
                     children: [
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            InkWell(
-                              child: const Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                              ),
-                              onTap: (){
-                                Navigator.pop(context);
-                              },
-                            ),
-                            const Spacer(),
-                            Text(AppLocalizations.of(context).translate('add_coins'),
-                              style: const TextStyle(
-                                  fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
-                              textAlign: TextAlign.start,
-                            ),
-                            const Spacer(),
-                          ],
-                        ),
-                      ),
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: Container(
@@ -469,7 +437,7 @@ class _TrendsPageState extends State<TrendsPage> {
                                               padding: const EdgeInsets.all(2.0),
                                               child: FadeInImage(
                                                 placeholder: const AssetImage('assets/image/cob.png'),
-                                                image: NetworkImage("$URL/Bitcoin/resources/icons/${name!.toLowerCase()}.png"),
+                                                image: NetworkImage("$URL/Bitcoin/resources/icons/${name.toLowerCase()}.png"),
                                               ),
                                             )
                                         ),
@@ -503,7 +471,7 @@ class _TrendsPageState extends State<TrendsPage> {
                                             Row(
                                               children: <Widget>[
                                                 Text(
-                                                  '\$${double.parse(coin!.toStringAsFixed(2))}',
+                                                  '\$${double.parse(coin.toStringAsFixed(2))}',
                                                   style: GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 15,color: Colors.white,   fontWeight: FontWeight.normal,)),
                                                 ),
                                               ],
@@ -547,54 +515,6 @@ class _TrendsPageState extends State<TrendsPage> {
                               ),
                             ),
                           ),
-                          // Row(
-                          //   children: <Widget>[
-                          //     Padding(
-                          //       padding: const EdgeInsets.all(10),
-                          //       child: FadeInImage(
-                          //         height: 70,
-                          //         placeholder: const AssetImage('assets/image/cob.png'),
-                          //         image: NetworkImage(
-                          //             "$URL/Bitcoin/resources/icons/${name!.toLowerCase()}.png"),
-                          //       ),
-                          //     ),
-                          //     Padding(
-                          //       padding: const EdgeInsets.all(10),
-                          //       child: Column(
-                          //         children: <Widget>[
-                          //           Padding(
-                          //             padding: const EdgeInsets.all(10),
-                          //             child: Text(name,
-                          //               style: const TextStyle(fontSize: 15, color: Colors.white),
-                          //             ),
-                          //           ),
-                          //           Padding(
-                          //             padding: const EdgeInsets.all(10),
-                          //             child: Align(
-                          //               alignment: Alignment.centerLeft,
-                          //               child: Row(
-                          //                 crossAxisAlignment: CrossAxisAlignment.center,
-                          //                 mainAxisAlignment:  MainAxisAlignment.center,
-                          //                 children: <Widget>[
-                          //                   Text(diffRate < 0 ? '-' : "+", textAlign: TextAlign.center,style: TextStyle(fontSize: 20, color: diffRate < 0 ? Colors.red : Colors.green)),
-                          //                   Icon(Icons.attach_money, size: 20, color: diffRate < 0 ? Colors.red : Colors.green),
-                          //                   Text(result, textAlign: TextAlign.center,style: TextStyle(fontSize: 20, color: diffRate < 0 ? Colors.red : Colors.green)),
-                          //                 ],
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           Padding(
-                          //             padding: const EdgeInsets.all(10),
-                          //             child: Text('\$$coin',
-                          //                 style: const TextStyle(fontSize: 25,
-                          //                     fontWeight:FontWeight.bold,color:Colors.white)
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
                         ),
                       ),
                       const SizedBox(
@@ -718,7 +638,7 @@ class _TrendsPageState extends State<TrendsPage> {
 
 
 class CartData {
-  final double date;
+  final String date;
   final double rate;
   final Color color;
 

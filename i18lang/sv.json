@@ -1,6 +1,7 @@
-  {
+{
   "top_coin": "Bästa mynt",
   "coins" : "Mynt",
+  "data_found" : "Ingen data hittades",
   "portfolio" : "Portfölj",
   "portfolio_value" : "Total portfölj",
   "trends" : "Trender",

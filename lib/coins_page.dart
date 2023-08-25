@@ -9,6 +9,7 @@ import 'package:http/http.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Navbar.dart';
+import 'analFutBit.dart';
 import 'dashboard_helper.dart';
 import 'localization/app_localization.dart';
 import 'models/Bitcoin.dart';
@@ -38,6 +39,7 @@ class _CoinsPageState extends State<CoinsPage>
 
   @override
   void initState() {
+    AnalFutBit.futCurScnBit(AnalFutBit.Fut_Con_Bit_Scn, "Bitcoin Future Coin Page");
     fetchRemoteValue();
     coinCountTextEditingController = TextEditingController();
     coinCountEditTextEditingController = TextEditingController();
