@@ -2,10 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Bitcoinfutureapp</string>
+	<string>Bitcoin Future App</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,9 +22,34 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.shs.bitcoinfutureapp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb229378916819662</string>
+				<string>tagmanager.c.com.shs.bitcoinfutureapp</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string>229378916819662</string>
+	<key>FacebookClientToken</key>
+	<string>b635086e78cd2d371ac019cb06379ba8</string>
+	<key>FacebookDisplayName</key>
+	<string>Bitcoin Future App</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -31,44 +58,15 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>CFBundleURLTypes</key>
-        <array>
-          <dict>
-          <key>CFBundleURLName</key>
-          <string>com.infa.bitcoinaiapp</string>
-          <key>CFBundleURLSchemes</key>
-          <array>
-            <string>fb1026730738525861</string>
-            <string>tagmanager.c.com.infa.bitcoinaiapp</string>
-          </array>
-          </dict>
-        </array>
-        <key>FacebookAppID</key>
-        <string>1026730738525861</string>
-        <key>FacebookClientToken</key>
-        <string>318d971cfd4103eef70f54e65e4be027</string>
-        <key>FacebookDisplayName</key>
-        <string>Bitcoin360 AI App</string>
-        <key>NSAppTransportSecurity</key>
-        	<dict>
-        		<key>NSAllowsArbitraryLoads</key>
-        		<true/>
-        	</dict>
 </dict>
 </plist>

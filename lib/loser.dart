@@ -356,11 +356,15 @@ class _TopLoser extends State<TopLoser> with SingleTickerProviderStateMixin{
         print(e);
       }catch(e){
         // toastMessage(message: 'An error occurred while fetching data.');
-        setState(() {});
+        setState(() {
+          isLoading = false;
+        });
       }
     }else {
       api_config.toastMessage(message: 'No Internet Connection');
-      setState(() {});
+      setState(() {
+        isLoading = false;
+      });
     }
     api_config.internetConnection();
   }
